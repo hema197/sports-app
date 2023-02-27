@@ -1,0 +1,80 @@
+.event {
+  border: 0.5px solid black;
+  margin-bottom: 1rem;
+  width: max(30%, 180px);
+  height: max(12vh, 150px);
+}
+
+.event.selectedCard {
+  background-color: rgb(210, 203, 203);
+}
+
+.selectedCard .add {
+  background: whitesmoke;
+  border: whitesmoke;
+  color: black;
+}
+
+.selectedCard .add:hover,
+.selectedCard .add:active {
+  cursor: not-allowed;
+  background-color: azure;
+}
+
+.event.selected {
+  width: max(65%, 180px);
+}
+
+.specifications {
+  display: flex;
+  width: 100%;
+}
+
+.eventCategory {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 30%;
+  border-right: 0.5px solid black;
+  margin-right: 0.8rem;
+}
+
+.eventDetails {
+  width: 100%;
+}
+
+p {
+  margin-block-start: 0.1em;
+  margin-block-end: 0.1em;
+}
+
+.actionButton {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 7%;
+  width: 100%;
+}
+
+.add {
+  background-color: green;
+  color: white;
+  border-color: green;
+  border-radius: 10px;
+  width: 50%;
+}
+
+.remove {
+  background-color: red;
+  border-color: red;
+  border-radius: 10px;
+  color: white;
+}
+
+.add:hover,
+.add:focus,
+.remove:hover,
+.remove:focus {
+  background: #282c34;
+  border-color: #282c34;
+}

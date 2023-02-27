@@ -1,0 +1,47 @@
+.eventsBox {
+  display: flex;
+  width: 90%;
+  margin: 0 auto;
+}
+
+.allEvents {
+  width: 68%;
+  border: 1px solid black;
+  box-shadow: none;
+  margin-right: 2%;
+}
+
+.selectedEvents {
+  width: 30%;
+  border: 1px solid black;
+  box-shadow: none;
+}
+
+.subheader {
+  text-align: center;
+}
+
+.centered {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@media (max-width: 768px) {
+  .eventsBox {
+    display: flex;
+    flex-direction: column;
+    width: 90%;
+    margin: 0 auto;
+    justify-content: space-between;
+  }
+
+  .allEvents {
+    width: 90%;
+    margin-bottom: 1rem;
+  }
+
+  .selectedEvents {
+    width: 90%;
+  }
+}

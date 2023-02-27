@@ -1,0 +1,16 @@
+.events {
+  display: flex;
+  padding: 0.5rem;
+}
+
+.events.allEventsList {
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.events.selectedEventsList {
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
