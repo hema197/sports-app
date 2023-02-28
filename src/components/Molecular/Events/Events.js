@@ -1,9 +1,10 @@
 import { useState, useEffect, useCallback } from "react";
-import LoadingSpinner from "../UI/LoadingSpinner.js";
-import EventsList from "./EventsList.js";
+import LoadingSpinner from "../../Atomic/LoadingSpinner/LoadingSpinner.js";
+import EventsList from "../EventsList/EventsList.js";
 import classes from "./Events.module.css";
-import Card from "../UI/Card.js";
-import Modal from "../UI/Modal.js";
+import Card from "../../Atomic/Card/Card.js";
+import Modal from "../../Atomic/Modal/Modal.js";
+import { checkTimings } from "../../../utils.js";
 
 const Events = () => {
   const [isLoading, setIsLoading] = useState(true);
@@ -29,15 +30,14 @@ const Events = () => {
       if (!response.ok) {
         throw new Error("Something went wrong");
       }
-      const eventsData = await response.json();
-      const loadedEvents = [];
-      for (const key in eventsData) {
-        loadedEvents.push({
-          ...eventsData[key],
+      let eventsData = await response.json();
+      eventsData = eventsData.map((event) => {
+        return {
+          ...event,
           selected: false,
-        });
-      }
-      setAllEvents(loadedEvents);
+        };
+      });
+      setAllEvents(eventsData);
       setIsLoading(false);
     };
 
@@ -47,19 +47,6 @@ const Events = () => {
     });
   }, []);
 
-  const checkTimings = function (startTime, endTime) {
-    let allowed = true;
-    selectedEvents.forEach((event) => {
-      if (event.start_time < endTime && startTime < event.end_time) {
-        setModalContent(
-          "You already have enrolled to one event which clashes with this event's time"
-        );
-        allowed = false;
-      }
-    });
-    return allowed;
-  };
-
   const selectEventHandler = (id) => {
     if (selectedEvents.length === 3) {
       setModalContent("You can enroll to a maximum of three events");
@@ -68,14 +55,19 @@ const Events = () => {
     const clickedEvent = allEvents.find((event) => event.id === id);
     let startTime = clickedEvent.start_time;
     let endTime = clickedEvent.end_time;
-    let canBeAdded = checkTimings(startTime, endTime);
-    if (canBeAdded) {
+    let canBeAdded = checkTimings(selectedEvents, startTime, endTime);
+    if (!canBeAdded) {
+      setModalContent(
+        "You already have enrolled to one event which clashes with this event's time"
+      );
+    } else {
       const updatedEvents = allEvents.map((curr) => {
         if (curr.id === id) {
           curr.selected = true;
         }
         return curr;
       });
+
       setAllEvents(updatedEvents);
       generateSelectedEvents();
     }

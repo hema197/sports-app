@@ -1,7 +1,8 @@
 import React from "react";
-import Card from "../UI/Card";
-import Button from "../UI/Button";
+import Card from "../../Atomic/Card/Card";
+import Button from "../../Atomic/Button/Button";
 import classes from "./EventCard.module.css";
+import { formatTime } from "../../../utils";
 
 const EventCard = (props) => {
   const actionHandler = function () {
@@ -11,25 +12,15 @@ const EventCard = (props) => {
     props.onClick(props.id);
   };
 
-  const formatTime = function (time) {
-    let formattedTime;
-    let hr_24 = Number(time.slice(0, 2));
-    let min = time.slice(3);
-    let hr_12 = hr_24 % 12;
-    if (hr_12 === 0) hr_12 = 12;
-    formattedTime = `${hr_12}:${min} ${hr_24 < 12 ? "am" : "pm"}`;
-    return formattedTime;
-  };
-  
   return (
     <Card
-      className={
+      className={`${classes.event} ${
         props.selected
           ? props.selectedCard
-            ? `${classes.event} ${classes.selectedCard}`
-            : `${classes.event} ${classes.selected}`
-          : `${classes.event}`
-      }
+            ? classes.selectedCard
+            : classes.selected
+          : ""
+      }`}
     >
       <section className={classes.specifications}>
         <section className={classes.eventCategory}>
@@ -50,13 +41,9 @@ const EventCard = (props) => {
       </section>
       <section className={classes.actionButton}>
         <Button
-          className={
-            props.selected
-              ? props.selectedCard
-                ? `${classes.add}`
-                : `${classes.remove}`
-              : `${classes.add}`
-          }
+          className={`${classes.add} ${
+            props.selected && !props.selectedCard ? classes.remove : ""
+          }`}
           onClick={actionHandler}
         >
           {props.selected

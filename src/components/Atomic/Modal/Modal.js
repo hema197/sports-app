@@ -1,7 +1,7 @@
 import classes from "./Modal.module.css";
 import { Fragment } from "react";
 import ReactDOM from "react-dom";
-import Button from "./Button";
+import Button from "../Button/Button";
 
 const Backdrop = (props) => {
   return <div className={classes.backdrop} onClick={props.onClick}></div>;

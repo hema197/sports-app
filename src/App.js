@@ -1,10 +1,10 @@
 import "./App.css";
-import Events from "./components/Events";
+import Events from "./components/Molecular/Events/Events";
 
 function App() {
   return (
     <div className="App">
-      <h2 className="App-header">Sports Day</h2>
+      <h1 className="App-header">Sports Day</h1>
       <Events />
     </div>
   );

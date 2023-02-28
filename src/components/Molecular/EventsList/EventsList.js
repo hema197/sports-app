@@ -1,15 +1,13 @@
 import React from "react";
 import classes from "./EventsList.module.css";
-import EventCard from "./EventCard.js";
+import EventCard from "../EventCard/EventCard.js";
 
 const EventsList = (props) => {
   return (
     <section
-      className={
-        props.selectedList
-          ? `${classes.events} ${classes.selectedEventsList}`
-          : `${classes.events} ${classes.allEventsList}`
-      }
+      className={`${classes.events} ${
+        props.selectedList ? classes.selectedEventsList : classes.allEventsList
+      }`}
     >
       {props.events.map((event) => (
         <EventCard
