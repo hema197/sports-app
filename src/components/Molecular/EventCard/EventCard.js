@@ -6,9 +6,6 @@ import { formatTime } from "../../../utils";
 
 const EventCard = (props) => {
   const actionHandler = function () {
-    if (props.selected && props.selectedCard) {
-      return;
-    }
     props.onClick(props.id);
   };
 
@@ -45,6 +42,8 @@ const EventCard = (props) => {
             props.selected && !props.selectedCard ? classes.remove : ""
           }`}
           onClick={actionHandler}
+          disabled={props.selected && props.selectedCard}
+          tabIndex={props.id}
         >
           {props.selected
             ? props.selectedCard

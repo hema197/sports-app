@@ -38,13 +38,13 @@ const Events = () => {
         };
       });
       setAllEvents(eventsData);
-      setIsLoading(false);
     };
 
-    fetchEvents().catch((err) => {
-      setHttpError(err.message);
-      setIsLoading(false);
-    });
+    fetchEvents()
+      .catch((err) => {
+        setHttpError(err.message);
+      })
+      .finally(() => setIsLoading(false));
   }, []);
 
   const selectEventHandler = (id) => {
@@ -113,6 +113,7 @@ const Events = () => {
           selectedList={false}
           events={allEvents}
           onAdd={selectEventHandler}
+          tabIndex={"1"}
         ></EventsList>
       </Card>
       <Card className={classes.selectedEvents}>
@@ -121,6 +122,7 @@ const Events = () => {
           selectedList={true}
           events={selectedEvents}
           onRemove={removeEventHandler}
+          tabIndex={"2"}
         ></EventsList>
       </Card>
     </Card>
